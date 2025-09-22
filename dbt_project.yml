@@ -1,0 +1,70 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'snowplow_recommendations'
+version: '0.1.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'default'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets: # Directories to be removed by `dbt clean`.
+  - "target"
+  - "dbt_packages"
+
+vars:
+  snowplow_recommendations:
+    # Add all tables that you want to export to S3 (and then to AWS Personalize).
+    tables_to_export: [ 
+      "snowplow_recommendations_ecommerce_interactions",
+      "snowplow_recommendations_ecommerce_items",
+      "snowplow_recommendations_ecommerce_users",
+      "snowplow_recommendations_media_interactions"
+    ] 
+
+    # Snowflake variables
+    snowflake_stage_name: "PersonalizeS3Stage"
+    
+    # Databricks variables
+    external_catalog: 'aws_personalize' # The name of the external Databricks catalog, can be found in the Terraform files/output.
+    s3_bucket: 's3://' # Requires the full s3 bucket path i.e. s3://<bucket_name>
+
+  # Below are only for ecommerce
+  # ecommerce_product_schema: '' # Only set if not using 'derived' schema for Snowplow ecommerce events data.
+  # ecommerce_product_database: '' # Only set if not using target database for Snowplow ecommerce events data.
+  ecommerce_product_source: "{{ source('ecommerce', 'snowplow_ecommerce_product_interactions') }}" # override with your ecommerce product interations table.
+  ecommerce_start_date: '2023-01-01'
+  ecommerce_end_date: '2023-01-31'
+  ecommerce_look_back_days: 31
+  ecommerce_product_categories_separator: '/'
+  
+  # Below are only for media (video_on_demand) 
+  snowplow__enable_youtube: true # Set to true if the YouTube context schema is enabled.
+  snowplow__enable_whatwg_media: true # Set to true if the HTML5 media element context schema is enabled.
+  # media_product_schema: '' # Only set if not using 'derived' schema for Snowplow media events data.
+  # media_product_database: '' # Only set if not using target database schema for Snowplow media events data.
+  media_player_source: "{{ source('media', 'snowplow_media_player_base') }}"
+  media_start_date: '2023-01-01'
+  media_end_date: '2023-01-31'
+  media_look_back_days: 31
+
+on-run-end:
+  - "{{ export_to_s3() }}"
+  
+models:
+  snowplow_recommendations:
+    +materialized: table
+    ecommerce:
+      enabled: true
+    media:
+      enabled: true

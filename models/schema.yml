@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: ecommerce
+    schema: "{{ var('ecommerce_product_schema', 'derived') }}"
+    database: "{{ var('ecommerce_product_database', target.database) }}"
+    tables:
+      - name: snowplow_ecommerce_product_interactions
+  - name: media
+    schema: "{{ var('media_product_schema', 'derived') }}"
+    database: "{{ var('media_product_database', target.database) }}"
+    tables:
+      - name: snowplow_media_player_base
+
+models:
+  - name: snowplow_recommendations_ecommerce_interactions
+    description: "Training dataset for AWS Personalize's ecommerce recommendations."
+    columns:
+      - name: user_id
+        description: "Snowplow Ecommerce user ID."
+      - name: item_id
+        description: "The product ID."
+      - name: timestamp
+        description: "Derived timestamp of the event in epoch seconds."
+      - name: event_type
+        description: "Both `page_view` and `list_view` ecommerce event types and `transaction` events."
+  
+  - name: snowplow_recommendations_media_interactions
+    description: "Training dataset for AWS Personalize's media recommendations."
+    columns:
+      - name: user_id
+        description: "Snowplow user ID."
+      - name: item_id
+        description: "The media ID."
+      - name: timestamp
+        description: "Derived timestamp of the event in epoch seconds."
+      - name: event_type
+        description: "Only `Watch` media event types are currently supported."
