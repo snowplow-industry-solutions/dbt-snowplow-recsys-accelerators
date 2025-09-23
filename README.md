@@ -111,7 +111,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 [license]: https://docs.snowplow.io/personal-and-academic-license-1.0/
-[license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
+[license-image]: https://img.shields.io/badge/license-SPAL-blue
 
 [website]: https://snowplow.io/
 [snowplow]: https://github.com/snowplow/snowplow
