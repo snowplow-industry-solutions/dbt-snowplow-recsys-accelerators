@@ -7,7 +7,7 @@
 
 # dbt-snowplow-recommendations
 
-This dbt package extract the relevant data from the Snowplow Ecommerce and Media models to prepare a training dataset to be used with AWS Personalize recommendation API and Shaped.ai CLI. The dbt packages running on either of the above data warehouses will write/unload the models as csv files on to an AWS S3 bucket that AWS Personalize can access and import from, for training datasets to create the recommendations. The same buckets, generated as Parquet files, can be used for initial Datasets in Shaped.ai.
+This dbt package extracts the relevant data from the Snowplow Ecommerce and Media models to prepare a training dataset to be used with the AWS Personalize recommendation API and Shaped.ai CLI. Running this dbt package running on either of the above data warehouses will write/unload the models as csv files on to an AWS S3 bucket that AWS Personalize can access and import from, for training datasets to create the recommendations. The same buckets, generated as Parquet files, can be used for initial Datasets in Shaped.ai.
 
 Currently, the media tracking from Snowplow does not provide a `click` event, which prevents Personalize from generating the Video On Demand's recommendation of `More Like X` and it is also why the `click` event types won't be available in our VOD's 'interactions' datasets.
 
