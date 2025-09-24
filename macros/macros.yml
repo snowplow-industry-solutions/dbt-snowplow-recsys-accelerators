@@ -4,7 +4,7 @@ macros:
   - name: create_ecommerce_items
     description: '{{ doc("macro_create_ecommerce_items") }}'
   - name: create_ecommerce_users
-    description: '{{ doc("macro_create_ecommerce_userss") }}'
+    description: '{{ doc("macro_create_ecommerce_users") }}'
   - name: export_data_to_s3
     description: '{{ doc("macro_export_data_to_s3") }}'
   - name: external_table_config
