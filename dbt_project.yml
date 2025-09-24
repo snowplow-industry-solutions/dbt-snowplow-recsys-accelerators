@@ -50,8 +50,8 @@ vars:
   ecommerce_product_categories_separator: '/'
   
   # Below are only for media (video_on_demand) 
-  snowplow__enable_youtube: true # Set to true if the YouTube context schema is enabled.
-  snowplow__enable_whatwg_media: true # Set to true if the HTML5 media element context schema is enabled.
+  # snowplow__enable_youtube: true # Set to true if the YouTube context schema is enabled.
+  # snowplow__enable_whatwg_media: true # Set to true if the HTML5 media element context schema is enabled.
   # media_product_schema: '' # Only set if not using 'derived' schema for Snowplow media events data.
   # media_product_database: '' # Only set if not using target database schema for Snowplow media events data.
   media_player_source: "{{ source('media', 'snowplow_media_player_base') }}"
