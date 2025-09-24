@@ -27,6 +27,12 @@ You may obtain a copy of the Snowplow Personal and Academic License Version 1.0 
     SINGLE = TRUE
     OVERWRITE = TRUE
     HEADER = TRUE;
+
+    COPY INTO @{{stage_name}}/{{table}}/personalize-dataset.parquet from {{schema}}.{{table}}
+    FILE_FORMAT = (TYPE = PARQUET COMPRESSION = NONE ESCAPE = '0x5c' FIELD_OPTIONALLY_ENCLOSED_BY = '"' )
+    SINGLE = TRUE
+    OVERWRITE = TRUE
+    HEADER = TRUE;
   {% endset %}
   {% do run_query(export_query) %}
 {% endmacro %}
