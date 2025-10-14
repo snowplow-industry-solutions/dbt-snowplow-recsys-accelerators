@@ -40,23 +40,26 @@ vars:
     external_catalog: 'aws_personalize' # The name of the external Databricks catalog, can be found in the Terraform files/output.
     s3_bucket: 's3://' # Requires the full s3 bucket path i.e. s3://<bucket_name>
 
+  # Snowplow Personal and Academic License __must__ be accepted to use this package.
+  # snowplow__license_accepted: false # Set to true to accept the license.
+
   # Below are only for ecommerce
-  # ecommerce_product_schema: '' # Only set if not using 'derived' schema for Snowplow ecommerce events data.
+  ecommerce_product_schema: '' # Only set if not using 'derived' schema for Snowplow ecommerce events data.
   # ecommerce_product_database: '' # Only set if not using target database for Snowplow ecommerce events data.
-  ecommerce_product_source: "{{ source('ecommerce', 'snowplow_ecommerce_product_interactions') }}" # override with your ecommerce product interations table.
-  ecommerce_start_date: '2023-01-01'
-  ecommerce_end_date: '2023-01-31'
+  ecommerce_product_source: "{{ ref('snowplow_ecommerce', 'snowplow_ecommerce_product_interactions') }}" # override with your ecommerce product interations table.
+  ecommerce_start_date: '2025-01-01'
+  ecommerce_end_date: '2025-01-31'
   ecommerce_look_back_days: 31
   ecommerce_product_categories_separator: '/'
   
   # Below are only for media (video_on_demand) 
   # snowplow__enable_youtube: true # Set to true if the YouTube context schema is enabled.
   # snowplow__enable_whatwg_media: true # Set to true if the HTML5 media element context schema is enabled.
-  # media_product_schema: '' # Only set if not using 'derived' schema for Snowplow media events data.
-  # media_product_database: '' # Only set if not using target database schema for Snowplow media events data.
-  media_player_source: "{{ source('media', 'snowplow_media_player_base') }}"
-  media_start_date: '2023-01-01'
-  media_end_date: '2023-01-31'
+  media_product_schema: '' # Only set if not using 'derived' schema for Snowplow media events data.
+  media_product_database: '' # Only set if not using target database schema for Snowplow media events data.
+  media_player_source: "{{ ref('snowplow_media_player', 'snowplow_media_player_base') }}"
+  media_start_date: '2025-01-01'
+  media_end_date: '2025-01-31'
   media_look_back_days: 31
 
 on-run-end:
