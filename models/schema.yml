@@ -24,7 +24,25 @@ models:
         description: "Derived timestamp of the event in epoch seconds."
       - name: event_type
         description: "Both `page_view` and `list_view` ecommerce event types and `transaction` events."
-  
+
+  - name: snowplow_recommendations_ecommerce_items
+    description: "Training dataset for AWS Personalize's ecommerce recommendations."
+    columns:
+      - name: item_id
+        description: "The product ID."
+      - name: price
+        description: "The price of the product."
+      - name: category_l1
+        description: "The primary category the product belongs to."
+
+  - name: snowplow_recommendations_ecommerce_users
+    description: "Training dataset for AWS Personalize's ecommerce recommendations."
+    columns:
+      - name: user_id
+        description: "Snowplow Ecommerce user ID."
+      - name: user_is_guest
+        description: "Whether the user is a guest or not; a guest is a user without an associated user_id/account, meaning their user_id here is the domain_userid."
+
   - name: snowplow_recommendations_media_interactions
     description: "Training dataset for AWS Personalize's media recommendations."
     columns:
