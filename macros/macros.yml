@@ -1,10 +1,14 @@
 version: 2
 
 macros:
+  - name: create_ecommerce_interactions
+    description: '{{ doc("macro_create_ecommerce_interactions") }}'
   - name: create_ecommerce_items
     description: '{{ doc("macro_create_ecommerce_items") }}'
   - name: create_ecommerce_users
     description: '{{ doc("macro_create_ecommerce_users") }}'
+  - name: create_media_interactions
+    description: '{{ doc("macro_create_media_interactions") }}'
   - name: export_data_to_s3
     description: '{{ doc("macro_export_data_to_s3") }}'
   - name: external_table_config
