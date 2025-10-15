@@ -1,0 +1,15 @@
+version: 2
+
+macros:
+  - name: create_ecommerce_items
+    description: '{{ doc("macro_create_ecommerce_items") }}'
+  - name: create_ecommerce_users
+    description: '{{ doc("macro_create_ecommerce_users") }}'
+  - name: export_data_to_s3
+    description: '{{ doc("macro_export_data_to_s3") }}'
+  - name: external_table_config
+    description: '{{ doc("macro_external_table_config") }}'
+    arguments:
+      - name: table_name
+        type: string
+        description: The name of the table (model) used to create the csv file on s3 for which the same table's data is exported.
